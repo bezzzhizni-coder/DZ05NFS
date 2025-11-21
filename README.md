@@ -53,4 +53,33 @@ root@testsrv2:/home/gor# mount | grep mnt
 systemd-1 on /mnt type autofs (rw,relatime,fd=67,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=4255)
 172.16.100.98:/pool01/share on /mnt type nfs (rw,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=172.16.100.98,mountvers=3,mountport=36648,mountproto=udp,local_lock=none,addr=172.16.100.98)
 ```
+```
+root@testsrv:~# cd /pool01/share/upload/
+root@testsrv:/pool01/share/upload# touch check_file
+root@testsrv:/pool01/share/upload#
+```
+```
+root@testsrv2:/mnt/upload# ls -la
+total 2
+drwxrwxrwx 2 nobody nogroup 3 ноя 21 10:37 .
+drwxr-xr-x 3 nobody nogroup 3 ноя 21 08:39 ..
+-rw-r--r-- 1 root   root    0 ноя 21 10:37 check_file
+root@testsrv2:/mnt/upload# touch client_file
+root@testsrv2:/mnt/upload# ls -la
+total 2
+drwxrwxrwx 2 nobody nogroup 4 ноя 21 10:38 .
+drwxr-xr-x 3 nobody nogroup 3 ноя 21 08:39 ..
+-rw-r--r-- 1 root   root    0 ноя 21 10:37 check_file
+-rw-r--r-- 1 nobody nogroup 0 ноя 21 10:38 client_file
+```
+```
+root@testsrv:~# showmount -a 172.16.100.98
+All mount points on 172.16.100.98:
+172.16.100.167:/pool01/share
+```
+```
+root@testsrv2:~# showmount -a 172.16.100.98
+All mount points on 172.16.100.98:
+172.16.100.167:/pool01/share
+```
 
